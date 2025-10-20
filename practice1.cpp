@@ -43,7 +43,14 @@ public:
     void display() const{
         std::cout << "Value: " << value << std::endl;
     }//const保证函数内成员变量不会被修改
+    MyClass& operator=(const MyClass& other);
 };
+MyClass& MyClass::operator=(const MyClass& other){
+    if(this != &other){
+        this->value = other.value;
+    }
+    return *this;
+}
 // 定义静态成员变量（分配内存）
 int MyClass::count = 0;
 void f()
@@ -68,6 +75,8 @@ int main() {
     obj.value = 42;
     obj.display();
     f();
+    MyClass obj2;
+    obj2=obj;
     // f();
     // f();
     system("pause");
